@@ -8,7 +8,7 @@ import socket
 class HelloWorldPlugin(octoprint.plugin.StartupPlugin,octoprint.plugin.TemplatePlugin):
     def __init__(self):
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self._socket(('192.168.1.103',42069))
+        self._socket.connect(('192.168.1.103',42069))
         self._socket.send("TEST_PRINTER")
 
     def on_after_startup(self):

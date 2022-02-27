@@ -9,7 +9,7 @@ class HelloWorldPlugin(octoprint.plugin.StartupPlugin,octoprint.plugin.TemplateP
     def __init__(self):
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._socket.connect(('192.168.1.103',42069))
-        self._socket.send(bytes("TEST_PRINTER"))
+        self._socket.send(bytes("TEST_PRINTER","utf-8"))
 
     def on_after_startup(self):
         self._logger.info("TESTING")

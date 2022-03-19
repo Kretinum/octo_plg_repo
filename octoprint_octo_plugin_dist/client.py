@@ -5,7 +5,7 @@ import threading
 class client():
     def __init__(self):
         self.__sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.__sock.connect((socket.gethostname(), 42069))
+        self.__sock.connect(('192.168.1.103', 42069))
         print("Connected")
         self.__sock.send(bytes("0\n", "utf-8"))
         if not exists("pi_info.txt"):

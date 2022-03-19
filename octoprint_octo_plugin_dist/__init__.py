@@ -3,7 +3,7 @@ from __future__ import absolute_import, unicode_literals
 import octoprint.plugin
 import socket
 from os.path import exists
-from client import client
+from .client import client
 
 class HelloWorldPlugin(octoprint.plugin.StartupPlugin,octoprint.plugin.TemplatePlugin):
 

@@ -8,7 +8,7 @@ import client
 class HelloWorldPlugin(octoprint.plugin.StartupPlugin,octoprint.plugin.TemplatePlugin):
 
     def __init__(self):
-        self.__client = client()
+        #self.__client = client()
         self._logger.info("STARTED CLIENT")
 
 

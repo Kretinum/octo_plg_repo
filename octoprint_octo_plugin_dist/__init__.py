@@ -10,7 +10,7 @@ class HelloWorldPlugin(octoprint.plugin.StartupPlugin,octoprint.plugin.TemplateP
 
     def on_after_startup(self):
         self._logger.info("TESTING")
-        self.__client = client()
+        self.__client = client(self)
         self._logger.info("STARTED CLIENT")
 
 

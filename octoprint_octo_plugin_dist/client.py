@@ -3,7 +3,8 @@ from os.path import exists
 import threading
 
 class client():
-    def __init__(self):
+    def __init__(self,plugin):
+        self.__plugin = plugin
         self.__sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.__sock.connect(('192.168.1.104', 42069))
         print("Connected")
@@ -27,9 +28,10 @@ class client():
             print("Awaiting request")
             req = self.__sock.recv(1024)
             req_type = req.decode("utf-8")
+            self.__plugin._logger.info(bytes(req_type,"utf-8"))
             if req_type == "ADD_GCODE\r\n":
                 len = int.from_bytes(self.__sock.recv(4),"big")
-                fileName = bytes.decode(self.__sock.recv(len),"utf-8");
+                fileName = bytes.decode(self.__sock.recv(len),"utf-8")
                 fileSize = int.from_bytes(self.__sock.recv(4),"big")
                 file = self.__sock.recv(fileSize)
                 print("Filename length:" + str(len))

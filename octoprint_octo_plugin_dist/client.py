@@ -8,8 +8,8 @@ class client():
         self.__sock.connect(('192.168.1.104', 42069))
         print("Connected")
         self.__sock.send(bytes("0\n", "utf-8"))
-        if not exists("pi_info.txt"):
-            with open("pi_info.txt", "w") as file:
+        if not exists("/aux/pi_info.txt"):
+            with open("/aux/pi_info.txt", "w") as file:
                 self.__sock.send(bytes("NEW_PI\n", "utf-8"))
                 msg = self.__sock.recv(1024)
                 file.write(msg.decode("utf-8"))

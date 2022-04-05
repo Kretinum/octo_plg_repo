@@ -25,7 +25,7 @@ class client():
 
     def listen(self):
         while True:
-            print("Awaiting request")
+            self.__plugin._logger.info("Awaiting request")
             req = self.__sock.recv(1024)
             req_type = req.decode("utf-8")
             self.__plugin._logger.info(bytes(req_type,"utf-8"))

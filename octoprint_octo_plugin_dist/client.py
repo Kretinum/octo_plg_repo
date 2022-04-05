@@ -38,6 +38,6 @@ class client():
                 print("Filename length:" + str(len))
                 print("Filename:" + fileName)
                 print("File length:" + str(fileSize))
-                with open(fileName,"wb") as binary_file:
+                with open("/home/pi/.octoprint/uploads/" +fileName,"wb") as binary_file:
                     binary_file.write(file)
                     binary_file.close()

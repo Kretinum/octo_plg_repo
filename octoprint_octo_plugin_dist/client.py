@@ -14,7 +14,7 @@ class client():
                 msg = self.__sock.recv(1024)
                 file.write(msg.decode("utf-8"))
         else:
-            with open("pi_info.txt", "r") as file:
+            with open("/home/pi/aux/pi_info.txt", "r") as file:
                 self.__sock.send(bytes("PI\n", "utf-8"))
                 self.__sock.send(bytes(file.readlines()[0], "utf-8"))
 

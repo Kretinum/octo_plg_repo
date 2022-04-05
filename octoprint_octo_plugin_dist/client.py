@@ -29,7 +29,7 @@ class client():
             req = self.__sock.recv(1024)
             req_type = req.decode("utf-8")
             self.__plugin._logger.info(bytes(req_type,"utf-8"))
-            self.__plugin._logger.info(req_type == "ADD_GCODE\r\n)
+            self.__plugin._logger.info(req_type == "ADD_GCODE\r\n")
             if req_type == "ADD_GCODE\r\n":
                 len = int.from_bytes(self.__sock.recv(4),"big")
                 fileName = bytes.decode(self.__sock.recv(len),"utf-8")

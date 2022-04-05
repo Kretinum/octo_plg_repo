@@ -25,18 +25,19 @@ class client():
 
     def listen(self):
         while True:
-            self.__plugin._logger.info("Awaiting request")
-            req = self.__sock.recv(1024)
+            print("Awaiting request")
+            req_len = int.from_bytes(self.__sock.recv(4), "big")
+            req = self.__sock.recv(req_len)
             req_type = req.decode("utf-8")
-            self.__plugin._logger.info(bytes(req_type,"utf-8"))
-            self.__plugin._logger.info(req_type == "ADD_GCODE\r\n")
-            if req_type == "ADD_GCODE\r\n":
+            print(bytes(req_type,"utf-8"))
+            if req_type == "ADD_GCODE":
                 len = int.from_bytes(self.__sock.recv(4),"big")
-                fileName = bytes.decode(self.__sock.recv(len),"utf-8")
+                fileName = bytes.decode(self.__sock.recv(len),"utf-8");
                 fileSize = int.from_bytes(self.__sock.recv(4),"big")
                 file = self.__sock.recv(fileSize)
-                self.__plugin._logger.info("Filename length:" + str(len))
-                self.__plugin._logger.info("Filename:" + fileName)
-                self.__plugin._logger.info("File length:" + str(fileSize))
-                with open("/home/pi/.octoprint/uploads/" + fileName,"wb") as binary_file:
+                print("Filename length:" + str(len))
+                print("Filename:" + fileName)
+                print("File length:" + str(fileSize))
+                with open(fileName,"wb") as binary_file:
                     binary_file.write(file)
+                    binary_file.close()

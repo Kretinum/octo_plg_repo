@@ -34,7 +34,7 @@ class client():
                 len = int.from_bytes(self.__sock.recv(4),"big")
                 fileName = bytes.decode(self.__sock.recv(len),"utf-8");
                 fileSize = int.from_bytes(self.__sock.recv(4),"big")
-                file = self.__sock.recv(fileSize)
+                file = self.__sock.recv(fileSize,socket.MSG_WAITALL)
                 print("Filename length:" + str(len))
                 print("Filename:" + fileName)
                 print("File length:" + str(fileSize))

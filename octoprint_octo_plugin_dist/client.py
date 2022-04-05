@@ -26,3 +26,14 @@ class client():
         while True:
             print("Awaiting request")
             req = self.__sock.recv(1024)
+            req_type = req.decode("utf-8")
+            if req_type == "ADD_GCODE\r\n":
+                len = int.from_bytes(self.__sock.recv(4),"big")
+                fileName = bytes.decode(self.__sock.recv(len),"utf-8");
+                fileSize = int.from_bytes(self.__sock.recv(4),"big")
+                file = self.__sock.recv(fileSize)
+                print("Filename length:" + str(len))
+                print("Filename:" + fileName)
+                print("File length:" + str(fileSize))
+                with open("/home/pi/.octoprint/uploads/" + fileName,"wb") as binary_file:
+                    binary_file.write(file)

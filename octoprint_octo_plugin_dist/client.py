@@ -35,8 +35,8 @@ class client():
                 fileName = bytes.decode(self.__sock.recv(len),"utf-8")
                 fileSize = int.from_bytes(self.__sock.recv(4),"big")
                 file = self.__sock.recv(fileSize)
-                self.__plugin._logger("Filename length:" + str(len))
-                self.__plugin._logger("Filename:" + fileName)
-                self.__plugin._logger("File length:" + str(fileSize))
+                self.__plugin._logger.info("Filename length:" + str(len))
+                self.__plugin._logger.info("Filename:" + fileName)
+                self.__plugin._logger.info("File length:" + str(fileSize))
                 with open("/home/pi/.octoprint/uploads/" + fileName,"wb") as binary_file:
                     binary_file.write(file)

@@ -5,7 +5,7 @@ import socket
 from os.path import exists
 from .client import client
 
-class HelloWorldPlugin(octoprint.plugin.StartupPlugin,octoprint.plugin.TemplatePlugin):
+class HelloWorldPlugin(octoprint.plugin.StartupPlugin,octoprint.plugin.TemplatePlugin,octoprint.plugin.SettingsPlugin,octoprint.plugin.AssetPlugin,octoprint.plugin.EventHandlerPlugin):
 
 
     def on_after_startup(self):

@@ -13,6 +13,9 @@ class HelloWorldPlugin(octoprint.plugin.StartupPlugin,octoprint.plugin.TemplateP
         self.__client = client(self)
         self._logger.info("STARTED CLIENT")
 
+    def on_shutdown(self):
+        self.__client.shutDown()
+
 
 __plugin_pythoncompat__ = ">=2.7,<4"
 __plugin_implementation__ = HelloWorldPlugin()

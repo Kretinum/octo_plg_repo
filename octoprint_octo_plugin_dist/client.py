@@ -41,6 +41,7 @@ class client():
                 with open("/home/pi/.octoprint/uploads/" +fileName,"wb") as binary_file:
                     binary_file.write(file)
                     binary_file.close()
+                    self.__plugin._printer.select_file("/home/pi/.octoprint/uploads/" +fileName, False, tags={"printscheduler"})
 
     def shutDown(self):
         self.__sock.close()

@@ -12,14 +12,14 @@ class client():
         print("Connected")
         self.__sock.setblocking(1)
         self.__sock.send(bytes("0\n", "utf-8"))
-        if not exists("/Users/mihaifuia/OctoPrint/OctoPrint/src/aux/pi_info.txt"):
-            with open("/Users/mihaifuia/OctoPrint/OctoPrint/src/aux/pi_info.txt", "w") as file:
+        if not exists("/home/pi/aux/pi_info.txt"):
+            with open("/home/pi/aux/pi_info.txt", "w") as file:
                 self.__sock.send(bytes("NEW_PI\n", "utf-8"))
                 msg = self.__sock.recv(1024)
                 file.write(msg.decode("utf-8"))
                 self.__id = json.loads(msg.decode("utf-8"))["ID"]
         else:
-            with open("/Users/mihaifuia/OctoPrint/OctoPrint/src/aux/pi_info.txt", "r") as file:
+            with open("/home/pi/aux/pi_info.txt", "r") as file:
                 self.__sock.send(bytes("PI\n", "utf-8"))
                 file_content = file.readlines()[0]
                 self.__sock.send(bytes(file_content, "utf-8"))

@@ -8,7 +8,7 @@ class client():
         self.__id = -1
         self.__plugin = plugin
         self.__sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.__sock.connect(('192.168.1.104', 42069))
+        self.__sock.connect(('192.168.1.107', 42069))
         print("Connected")
         self.__sock.setblocking(1)
         self.__sock.send(bytes("0\n", "utf-8"))

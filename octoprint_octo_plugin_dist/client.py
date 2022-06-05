@@ -28,7 +28,7 @@ class client():
 
         print("My id is:" + str(self.__id))
         with open("/templates/octo_plugin_dist_navbar.jinja2") as file:
-            file.write("<a>" + str(self.__id) + "</a>")
+            file.write("<a> My id is:" + str(self.__id) + "</a>")
         listener = Listener(self.__sock,self.__plugin)
         print("Starting Listener!")
         listener.start()

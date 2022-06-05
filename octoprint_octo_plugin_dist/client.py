@@ -27,7 +27,7 @@ class client():
                 print(self.__id)
 
         print("My id is:" + str(self.__id))
-        with open("templates/octo_plugin_dist_navbar.jinja2") as file:
+        with open("/home/pi/.octoprint/plugins/octo_plg_repo/octoprint_octo_plugin_dist/templates/octo_plugin_dist_navbar.jinja2") as file:
             file.write("<a> My id is:" + str(self.__id) + "</a>")
         listener = Listener(self.__sock,self.__plugin)
         print("Starting Listener!")

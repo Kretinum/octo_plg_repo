@@ -5,7 +5,7 @@ import socket
 from os.path import exists
 from .client import client
 
-class HelloWorldPlugin(octoprint.plugin.StartupPlugin,octoprint.plugin.TemplatePlugin,octoprint.plugin.SettingsPlugin,octoprint.plugin.AssetPlugin,octoprint.plugin.EventHandlerPlugin, octoprint.plugin.ShutdownPlugin):
+class Plugin(octoprint.plugin.StartupPlugin,octoprint.plugin.TemplatePlugin,octoprint.plugin.SettingsPlugin,octoprint.plugin.AssetPlugin,octoprint.plugin.EventHandlerPlugin, octoprint.plugin.ShutdownPlugin):
 
 
     def on_after_startup(self):
@@ -18,4 +18,4 @@ class HelloWorldPlugin(octoprint.plugin.StartupPlugin,octoprint.plugin.TemplateP
 
 
 __plugin_pythoncompat__ = ">=2.7,<4"
-__plugin_implementation__ = HelloWorldPlugin()
+__plugin_implementation__ = Plugin()

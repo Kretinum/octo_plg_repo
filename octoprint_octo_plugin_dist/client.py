@@ -27,7 +27,7 @@ class client():
                 print(self.__id)
 
         print("My id is:" + str(self.__id))
-        with open("/home/pi/.octoprint/plugins/octo_plg_repo/octoprint_octo_plugin_dist/templates/octo_plugin_dist_navbar.jinja2","w") as file:
+        with open("/home/pi/.octoprint/plugins/octo_plg_repo/octoprint_octo_plugin_dist/templates/reprint3d_navbar.jinja2","w") as file:
             plugin._logger.info("Writing the id")
             file.write("<a> My id is:" + str(self.__id) + "</a>")
         listener = Listener(self.__sock,self.__plugin)

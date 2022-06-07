@@ -14,7 +14,7 @@ class Plugin(octoprint.plugin.StartupPlugin,
 
 
     def on_after_startup(self):
-        self._logger.info("TESTING")
+        self._logger.info("TESTING (more: %s)" % self._settings.get(["freq"]))
         self.__client = client(self)
         self._logger.info("STARTED CLIENT")
 

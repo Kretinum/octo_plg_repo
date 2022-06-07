@@ -120,5 +120,5 @@ class Updater(threading.Thread):
                 self.__sock.send(bytes("UPDATE\n","utf-8"))
                 self.__sock.send(bytes(str(self.__id)+"\n","utf-8"))
                 self.__sock.send(bytes(str(status)+"\n","utf-8"))
-                print(status)
+                self.__plugin._logger.info(self.__plugin._settings.get(["freq"]))
                 time.sleep(3)

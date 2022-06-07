@@ -13,6 +13,9 @@ class Plugin(octoprint.plugin.StartupPlugin,
              octoprint.plugin.ShutdownPlugin):
 
 
+    def __init__(self):
+        self.__client = None
+
     def on_after_startup(self):
         self._logger.info("TESTING (more: %s)" % self._settings.get(["freq"]))
         self.__client = client(self)

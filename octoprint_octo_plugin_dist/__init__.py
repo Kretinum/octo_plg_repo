@@ -27,11 +27,11 @@ class Plugin(octoprint.plugin.StartupPlugin,
     def get_template_vars(self):
         return dict(freq=self._settings.get(["freq"]))
 
-    def get_template_configs(self):
-        return [
-            dict(type="navbar", custom_bindings=False),
-            dict(type="settings", custom_bindings=False)
-        ]
+    #def get_template_configs(self):
+    #    return [
+    #        dict(type="navbar", custom_bindings=False),
+    #        dict(type="settings", custom_bindings=False)
+    #    ]
 
 __plugin_pythoncompat__ = ">=2.7,<4"
 __plugin_name__ = "REPrin3D"

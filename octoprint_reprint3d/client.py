@@ -50,10 +50,12 @@ class Listener(threading.Thread):
         self.__plugin._logger.info("Listener started!")
         while True:
             #self.__plugin._logger.info("Awaiting request")
-            req_len = int.from_bytes(self.__sock.recv(4), "big")
+            len_bytes = self.__sock.recv(4)
+            self.__plugin._logger.info(len_bytes)
+            req_len = int.from_bytes(len_bytes, "big")
             req = self.__sock.recv(req_len)
             req_type = req.decode("utf-8")
-            self.__plugin._logger.info(req_type)
+            #self.__plugin._logger.info(req_type)
 
             if req_type == "ADD_GCODE":
                 len = int.from_bytes(self.__sock.recv(4),"big")

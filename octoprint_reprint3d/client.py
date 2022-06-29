@@ -100,6 +100,7 @@ class Updater(threading.Thread):
 
 
     def run(self):
+        self.__plugin._logger.info("Updater started!")
         while True:
             #plugin._logger.info("Sending an update!")
                 connection = self.__plugin._printer.get_current_connection()

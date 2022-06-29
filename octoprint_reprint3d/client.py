@@ -49,7 +49,7 @@ class Listener(threading.Thread):
     def run(self):
         self.__plugin._logger.info("Listener started!")
         while True:
-            #plugin._logger.info("Awaiting request")
+            self.__plugin._logger.info("Awaiting request")
             req_len = int.from_bytes(self.__sock.recv(4), "big")
             req = self.__sock.recv(req_len)
             req_type = req.decode("utf-8")
@@ -69,7 +69,7 @@ class Listener(threading.Thread):
                     self.__plugin._printer.select_file("/home/pi/.octoprint/uploads/" +fileName, False, tags={"printscheduler"})
                     self.__plugin._printer.start_print(tags={"printscheduler"})
             elif req_type == "HOME":
-                #plugin._logger.info("Goin home!")
+                self.__plugin._logger.info("Goin home!")
                 self.__plugin._printer.home(["x","y","z"])
             elif req_type == "MOVE":
                 #plugin._logger.info("Movin'")

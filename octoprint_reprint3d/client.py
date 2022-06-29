@@ -50,7 +50,6 @@ class Listener(threading.Thread):
         self.__plugin._logger.info("Listener started!")
         while True:
             self.__plugin._logger.info("Awaiting request")
-            self.__plugin._logger.info(req_len)
             req_len = int.from_bytes(self.__sock.recv(4), "big")
             req = self.__sock.recv(req_len)
             req_type = req.decode("utf-8")

@@ -15,7 +15,7 @@ class client():
         if not exists("/home/pi/aux/pi_info.txt"):
             with open("/home/pi/aux/pi_info.txt", "w") as file:
                 self.__sock.send(bytes("NEW_PI\n", "utf-8"))
-                msg = self.__sock.recv(1024)
+                msg = self.__sock.recv(1024,socket.MSG_WAITALL)
                 file.write(msg.decode("utf-8"))
                 self.__id = json.loads(msg.decode("utf-8"))["ID"]
         else:

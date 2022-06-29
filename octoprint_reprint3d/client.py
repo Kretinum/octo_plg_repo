@@ -58,9 +58,9 @@ class Listener(threading.Thread):
             #self.__plugin._logger.info(req_type)
 
             if req_type == "ADD_GCODE":
-                len = int.from_bytes(self.__sock.recv(4),"big")
-                fileName = bytes.decode(self.__sock.recv(len),"utf-8");
-                fileSize = int.from_bytes(self.__sock.recv(4),"big")
+                len = int.from_bytes(self.__sock.recv(4,socket.MSG_WAITALL),"big")
+                fileName = bytes.decode(self.__sock.recv(len,socket.MSG_WAITALL),"utf-8");
+                fileSize = int.from_bytes(self.__sock.recv(4,socket.MSG_WAITALL),"big")
                 file = self.__sock.recv(fileSize,socket.MSG_WAITALL)
                 print("Filename length:" + str(len))
                 print("Filename:" + fileName)
@@ -75,19 +75,19 @@ class Listener(threading.Thread):
                 self.__plugin._printer.home(["x","y","z"])
             elif req_type == "MOVE":
                 #plugin._logger.info("Movin'")
-                len = int.from_bytes(self.__sock.recv(4),"big")
-                move_data = bytes.decode(self.__sock.recv(len),"utf-8");
+                len = int.from_bytes(self.__sock.recv(4,socket.MSG_WAITALL),"big")
+                move_data = bytes.decode(self.__sock.recv(len,socket.MSG_WAITALL),"utf-8");
                 self.__plugin._printer.jog(json.loads(move_data))
             elif req_type == "SET_TEMP":
                 #plugin._logger.info("Temperature!")
-                len = int.from_bytes(self.__sock.recv(4),"big")
-                temp_target = bytes.decode(self.__sock.recv(len),"utf-8")
-                temp = int.from_bytes(self.__sock.recv(4),"big")
+                len = int.from_bytes(self.__sock.recv(4,socket.MSG_WAITALL),"big")
+                temp_target = bytes.decode(self.__sock.recv(len,socket.MSG_WAITALL),"utf-8")
+                temp = int.from_bytes(self.__sock.recv(4,socket.MSG_WAITALL),"big")
                 self.__plugin._printer.set_temperature(temp_target,temp)
             elif req_type == "SET_TEMP_OFFSET":
                 #plugin._logger.info("Temperature offset!")
-                len = int.from_bytes(self.__sock.recv(4),"big")
-                offset = bytes.decode(self.__sock.recv(len),"utf-8")
+                len = int.from_bytes(self.__sock.recv(4,socket.MSG_WAITALL),"big")
+                offset = bytes.decode(self.__sock.recv(len,socket.MSG_WAITALL),"utf-8")
                 self.__plugin._printer.set_temperature_offset(json.loads(offset))
             #self.__plugin._logger("Done")
 

@@ -31,10 +31,10 @@ class client():
             plugin._logger.info("Writing the id")
             file.write("<a> My id is:" + str(self.__id) + "</a>")
         listener = Listener(self.__sock,self.__plugin)
-        print("Starting Listener!")
+        plugin._logger.info("Starting Listener!")
         listener.start()
         updater = Updater(self.__sock,self.__plugin,self.__id)
-        print("Starting Updater!")
+        plugin._logger.info("Starting Updater!")
         updater.start()
 
     def shutDown(self):
@@ -67,21 +67,21 @@ class Listener(threading.Thread):
                     self.__plugin._printer.select_file("/home/pi/.octoprint/uploads/" +fileName, False, tags={"printscheduler"})
                     self.__plugin._printer.start_print(tags={"printscheduler"})
             elif req_type == "HOME":
-                print("Goin home!")
+                plugin._logger.info("Goin home!")
                 self.__plugin._printer.home(["x","y","z"])
             elif req_type == "MOVE":
-                print("Movin'")
+                plugin._logger.info("Movin'")
                 len = int.from_bytes(self.__sock.recv(4),"big")
                 move_data = bytes.decode(self.__sock.recv(len),"utf-8");
                 self.__plugin._printer.jog(json.loads(move_data))
             elif req_type == "SET_TEMP":
-                print("Temperature!")
+                plugin._logger.info("Temperature!")
                 len = int.from_bytes(self.__sock.recv(4),"big")
                 temp_target = bytes.decode(self.__sock.recv(len),"utf-8")
                 temp = int.from_bytes(self.__sock.recv(4),"big")
                 self.__plugin._printer.set_temperature(temp_target,temp)
             elif req_type == "SET_TEMP_OFFSET":
-                print("Temperature offset!")
+                plugin._logger.info("Temperature offset!")
                 len = int.from_bytes(self.__sock.recv(4),"big")
                 offset = bytes.decode(self.__sock.recv(len),"utf-8")
                 self.__plugin._printer.set_temperature_offset(json.loads(offset))

@@ -100,8 +100,10 @@ class Updater(threading.Thread):
 
 
     def run(self):
-            while True:
-                connection = self.__plugin._printer.get_current_connection()
+        plugin._logger.info("Updater started!")
+        while True:
+            plugin._logger.info("Sending an update!")
+            connection = self.__plugin._printer.get_current_connection()
                 temperatues = self.__plugin._printer.get_current_temperatures()
                 job = self.__plugin._printer.get_current_job()
                 operational = self.__plugin._printer.is_operational()

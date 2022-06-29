@@ -47,9 +47,9 @@ class Listener(threading.Thread):
         self.__sock = sock
         self.__plugin = plugin
     def run(self):
-        plugin._logger.info("Listener started!")
+        #plugin._logger.info("Listener started!")
         while True:
-            plugin._logger.info("Awaiting request")
+            #plugin._logger.info("Awaiting request")
             req_len = int.from_bytes(self.__sock.recv(4), "big")
             req = self.__sock.recv(req_len)
             req_type = req.decode("utf-8")
@@ -69,21 +69,21 @@ class Listener(threading.Thread):
                     self.__plugin._printer.select_file("/home/pi/.octoprint/uploads/" +fileName, False, tags={"printscheduler"})
                     self.__plugin._printer.start_print(tags={"printscheduler"})
             elif req_type == "HOME":
-                plugin._logger.info("Goin home!")
+                #plugin._logger.info("Goin home!")
                 self.__plugin._printer.home(["x","y","z"])
             elif req_type == "MOVE":
-                plugin._logger.info("Movin'")
+                #plugin._logger.info("Movin'")
                 len = int.from_bytes(self.__sock.recv(4),"big")
                 move_data = bytes.decode(self.__sock.recv(len),"utf-8");
                 self.__plugin._printer.jog(json.loads(move_data))
             elif req_type == "SET_TEMP":
-                plugin._logger.info("Temperature!")
+                #plugin._logger.info("Temperature!")
                 len = int.from_bytes(self.__sock.recv(4),"big")
                 temp_target = bytes.decode(self.__sock.recv(len),"utf-8")
                 temp = int.from_bytes(self.__sock.recv(4),"big")
                 self.__plugin._printer.set_temperature(temp_target,temp)
             elif req_type == "SET_TEMP_OFFSET":
-                plugin._logger.info("Temperature offset!")
+                #plugin._logger.info("Temperature offset!")
                 len = int.from_bytes(self.__sock.recv(4),"big")
                 offset = bytes.decode(self.__sock.recv(len),"utf-8")
                 self.__plugin._printer.set_temperature_offset(json.loads(offset))

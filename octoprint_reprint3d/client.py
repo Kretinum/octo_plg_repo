@@ -47,6 +47,7 @@ class Listener(threading.Thread):
         self.__sock = sock
         self.__plugin = plugin
     def run(self):
+        plugin._logger.info("Listener started!")
         while True:
             plugin._logger.info("Awaiting request")
             req_len = int.from_bytes(self.__sock.recv(4), "big")

@@ -50,9 +50,7 @@ class Listener(threading.Thread):
         self.__plugin._logger.info("Listener started!")
         while True:
             self.__plugin._logger.info("Awaiting request")
-            self.__plugin._logger.info("Waiting to recieve")
             req_len = int.from_bytes(self.__sock.recv(4), "big")
-            self.__plugin._logger(req_len)
             req = self.__sock.recv(req_len)
             req_type = req.decode("utf-8")
             if req_type == "ADD_GCODE":
@@ -87,6 +85,8 @@ class Listener(threading.Thread):
                 len = int.from_bytes(self.__sock.recv(4),"big")
                 offset = bytes.decode(self.__sock.recv(len),"utf-8")
                 self.__plugin._printer.set_temperature_offset(json.loads(offset))
+            self.__plugin._logger("Done")
+
 
 
 

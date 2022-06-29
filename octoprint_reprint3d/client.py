@@ -48,11 +48,12 @@ class Listener(threading.Thread):
         self.__plugin = plugin
     def run(self):
         while True:
-            print("Awaiting request")
+            plugin._logger.info("Awaiting request")
             req_len = int.from_bytes(self.__sock.recv(4), "big")
             req = self.__sock.recv(req_len)
             req_type = req.decode("utf-8")
             print(bytes(req_type,"utf-8"))
+            plugin._logger.info(req_type)
             if req_type == "ADD_GCODE":
                 len = int.from_bytes(self.__sock.recv(4),"big")
                 fileName = bytes.decode(self.__sock.recv(len),"utf-8");
